@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+    <link name="base_link">
+    </link>
+
+    <xacro:property name="robot_radius" value="0.2" />
+    <xacro:property name="robot_height" value="0.5" />
+    <xacro:property name="PI" value="3.14159265" />
+    <xacro:property name="mesh_dir" value="$(find discower_transportation)/description/meshes"/>
+
+    <joint name="base_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="load"/>
+        <origin xyz="0 0 0"/>
+    </joint> 
+
+    <!-- ====== LOAD ====== -->
+    <link name="load">
+        <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>                
+                <mesh filename="${mesh_dir}/alpha.dae"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 ${robot_height/2}" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="${robot_radius}" length="${robot_height}" />
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 ${robot_height/2}" rpy="0 0 0"/>
+            <mass value="18.3"/>
+            <inertia ixx="0.1"  ixy="0"  ixz="0" iyy="0.1" iyz="0" izz="0.41" />
+        </inertial> 
+    </link>
+
+
+    <gazebo>
+        <self_collide>1</self_collide>
+    </gazebo>
+
+
+    <gazebo reference="load">
+        <mu1 value="0.000001"/>
+        <mu2 value="0.000001"/>
+    </gazebo>
+
+
+    <!-- gazebo plugin for truth pose of robots -->
+    <gazebo>
+        <plugin name="base_link" filename="libgazebo_ros_p3d.so">
+        <ros>
+          <remapping>odom:=pose</remapping>
+        </ros>
+            <frame_name>world</frame_name>
+            <body_name>base_link</body_name>
+            <update_rate>50.0</update_rate>
+            <xyz_offset>0 0 0</xyz_offset>
+            <rpy_offset>0 0 0</rpy_offset>
+        </plugin>
+    </gazebo>
+
+
+    <!-- gazebo plugin for applying force to body frame -->
+    <gazebo>
+        <plugin name="gazebo_ros_force" filename="libgazebo_ros_force.so">
+        <ros>
+          <remapping>gazebo_ros_force:=wrench</remapping>
+        </ros>
+            <!-- Name of link within model which will receive the force -->
+            <link_name>base_link</link_name>
+            <!-- Frame where the force/torque will be applied (options: world; link)-->
+            <force_frame>link</force_frame>
+        </plugin>
+    </gazebo>
+
+</robot>

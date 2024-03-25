@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="robot">
+    <!-- uncomment the following line to use transporter -->
+    <xacro:include filename="transporter.xacro"/>
+
+    <!-- uncomment the following line to use single robot -->
+    <!-- <xacro:include filename="single.xacro"/> -->
+    
+</robot>
