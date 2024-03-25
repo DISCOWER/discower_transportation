@@ -41,7 +41,7 @@ ros2 launch discower_transportation set_initial.launch.py
 There are two robots and one load as shown in Fig. 1. The load is connected to the robots by cables. Each robot has four thruster pairs and is controlled by the PWM controller. Body wrench of each robot is calculated by the following equation:
 $$
 \begin{align}
-    \bm{F} &= \bm{D} \bm{u} =
+    \mathbf{F} &= \mathbf{D} \mathbf{u} =
     \begin{bmatrix}
         F_x \\ F_y 
     \end{bmatrix} = 
