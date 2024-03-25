@@ -4,6 +4,8 @@ We present a simulator in Gazebo to simulate the Multi-agent load transportation
 ## Required Installation
 - ROS 2 Foxy
 - Casadi
+- Gazebo ROS2 Control plugin
+- Gazebo Plugins
 
 ## Running Simulation
 1. Clone the repository:
