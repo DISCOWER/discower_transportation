@@ -39,32 +39,32 @@ ros2 launch discower_transportation set_initial.launch.py
 
 ## Simulator
 There are two robots and one load as shown in Fig. 1. The load is connected to the robots by cables. Each robot has four thruster pairs and is controlled by the PWM controller. Body wrench of each robot is calculated by the following equation:
-$$
-\begin{align}
-    \mathbf{F} &= \mathbf{D} \mathbf{u} =
-    \begin{bmatrix}
-        F_x \\ F_y 
-    \end{bmatrix} = 
-    \begin{bmatrix}
-    1 & 1 & 0 & 0 \\
-    0 & 0 & 1 & 1
-    \end{bmatrix}
-    \begin{bmatrix}
-    u_1 \\ u_2 \\ u_3 \\ u_4
-    \end{bmatrix}  \\
-    \bm{\tau} &= \bm{L}\bm{u} =
-    \begin{bmatrix}
-        \tau_z
-    \end{bmatrix} = 
-    l_{arm}\begin{bmatrix}
-    1 & -1 & 1 & -1
-    \end{bmatrix}
-    \begin{bmatrix}
-    u_1 \\ u_2 \\ u_3 \\ u_4
-    \end{bmatrix}
-\end{align}
-$$
+```math
+\mathbf{F} = \mathbf{D} \mathbf{u} =
+\begin{bmatrix}
+    F_x \\ F_y 
+\end{bmatrix} = 
+\begin{bmatrix}
+1 & 1 & 0 & 0 \\
+0 & 0 & 1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+u_1 \\ u_2 \\ u_3 \\ u_4
+\end{bmatrix}
+```
 
+```math
+\boldsymbol{\tau} = \mathbf{L}\mathbf{u} =
+\begin{bmatrix}
+    \tau_z
+\end{bmatrix} = 
+l_{arm}\begin{bmatrix}
+1 & -1 & 1 & -1
+\end{bmatrix}
+\begin{bmatrix}
+u_1 \\ u_2 \\ u_3 \\ u_4
+\end{bmatrix}
+```
 <div align="center">
 <img src="fig/simulator.png" width="300">
 
