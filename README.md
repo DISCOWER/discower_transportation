@@ -10,7 +10,7 @@ We present a simulator in Gazebo to simulate the Multi-agent load transportation
 ## Running Simulation
 1. Clone the repository:
 ```
-git clone git@github.com:pSujet/discower_transportation.git
+git clone git@github.com:DISCOWER/discower_transportation.git
 ```
 2. Build the workspace:
 ```
