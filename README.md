@@ -1,4 +1,4 @@
-# Load Transportation Simulator (DISCOWER)
+# Load Transportation Simulator
 We present a simulator in Gazebo to simulate the Multi-agent load transportation package in the microgravity environment. 
 
 ## Required Installation
