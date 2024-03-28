@@ -52,7 +52,7 @@ ros2 run discower_transportation example_controller.py
 To run the Transport MPC controllers, clone into the workspace the Transport MPC:
 ```bash
 cd ~/discower_ws/src
-git clone
+git clone git@github.com:pSujet/transport_mpc.git
 ```
 Then, rebuild the workspace:
 ```bash
