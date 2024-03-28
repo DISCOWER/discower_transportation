@@ -106,6 +106,10 @@ class ControllerDecenNode(Node):
         self.robot2_pose = np.vstack([0,-0.9,0,0,0,0])                              # set initial position for robot 2
         self.load_pose = np.vstack([0,0,0,0,0,0])                                   # set initial position for load
 
+        # -- Set velocity offset (Gazebo issue at startup)
+        self.vel_offset_x = None
+        self.vel_offset_y = None
+
     def load_odometry_callback(self, msg):
         '''
         Get relevant information from the Odometry message and update the current pose of the load
@@ -293,8 +297,11 @@ class ControllerDecenNode(Node):
         orientation_z = msg.pose.pose.orientation.z
         orientation_w = msg.pose.pose.orientation.w
         theta = self.quat2yaw(orientation_z,orientation_w)
-        linear_x = msg.twist.twist.linear.x+0.0215
-        linear_y = msg.twist.twist.linear.y-0.0215
+        if self.vel_offset_x is None and self.vel_offset_y is None:
+            self.vel_offset_x = msg.twist.twist.linear.x
+            self.vel_offset_y = msg.twist.twist.linear.y
+        linear_x = msg.twist.twist.linear.x - self.vel_offset_x
+        linear_y = msg.twist.twist.linear.y - self.vel_offset_y
         angular_z = msg.twist.twist.angular.z
         pose = np.vstack([pose_x,
                           pose_y,
