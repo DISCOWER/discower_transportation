@@ -13,27 +13,34 @@ We present a simulator in Gazebo to simulate Multi-agent load transportation tas
 - Gazebo ROS2 Control plugin
 - Gazebo Plugins
 
-**NOTE**: this package was tested on a Ubuntu 22.04 LTS with the packages above mentioned. Different versions of Casadi and ROS 2 may work, but it is not guaranteed.
+**NOTE**: this package was tested on a Ubuntu 20.04 LTS with the packages above mentioned. Different versions of Casadi and ROS 2 may work, but it is not guaranteed.
 
 ## Running Simulation
-1. Clone the repository:
+1. Create a ROS 2 workspace:
+```bash
+cd ~
+mkdir -p ~/discower_ws/src
+cd ~/discower_ws/src
+```
+2. Clone the repository:
 ```bash
 git clone git@github.com:DISCOWER/discower_transportation.git
 ```
-2. Build the workspace:
+3. Build the workspace:
 ```bash
+cd ~/discower_ws
 colcon build --symlink-install
 source install/setup.bash 
 ```
-3. Start Gazebo simulation
+4. Start Gazebo simulation
 ```bash
 ros2 launch discower_transportation launch_sim.launch.py 
 ```
-4. Start PWM controller
+5. Start PWM controller
 ```bash
 ros2 run discower_transportation start_pwm_controller.py 
 ```
-5. Run the Example controller.
+6. Run the Example controller.
 This controller is a simple controller that moves the load forward.
 
 ```bash
@@ -42,8 +49,18 @@ ros2 run discower_transportation example_controller.py
 
 ## Running [Transport MPC](https://github.com/pSujet/transport_mpc)
 
-To run the Transport MPC controllers, instead of running the example in step 5, run the following command:
-
+To run the Transport MPC controllers, clone into the workspace the Transport MPC:
+```bash
+cd ~/discower_ws/src
+git clone
+```
+Then, rebuild the workspace:
+```bash
+cd ~/discower_ws
+colcon build --symlink-install
+source install/setup.bash 
+```
+Then, run steps 4 and 5 from the previous section, followed by one of the following:
 * Run centralized controller:
 ```bash
 ros2 launch transport_mpc start_controller_cen.launch.py
